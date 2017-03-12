@@ -1,0 +1,22 @@
+version: '2'
+services:
+    ms-web:      
+        image: ms-web-dev
+        container_name: ms-web
+        ports:
+            - "3001:3001"
+        volumes: 
+            - ../ms-demo-web:$MS_WEB_HOME
+        external_links:  
+            - "ms-demo-orchestrator:web-alias-orchestrator"
+        user: $UID
+        networks:
+           - msdisplaytypicode_default
+
+volumes:
+  dbdata:
+
+networks:
+  msdisplaytypicode_default:
+    external: true
+  

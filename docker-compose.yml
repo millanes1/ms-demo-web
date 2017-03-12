@@ -1,22 +1,22 @@
-version: '2'
+version: '2'  
 services:
-    ms-web:      
-        image: ms-web-dev
-        container_name: ms-web
-        ports:
-            - "3001:3001"
-        volumes: 
-            - ../ms-demo-web:$MS_WEB_HOME
-        external_links:  
-            - "ms-demo-orchestrator:web-alias-orchestrator"
-        user: $UID
-        networks:
+     demo:
+      build: 
+        context: .
+        dockerfile: Dockerfile.dev
+      ports:
+        - 8079:8080
+      container_name: ms-demo-orchestrator
+      external_links:
+         - ms-rest-todos:web-alias-todos
+         - ms-rest-employee:web-alias-employee
+      networks:
+           - default
            - msdisplaytypicode_default
-
-volumes:
-  dbdata:
-
+           - pocmcemployee_default
 networks:
+  default:
   msdisplaytypicode_default:
     external: true
-  
+  pocmcemployee_default:
+    external: true
